@@ -4,7 +4,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import TaskManager from '../Tasks/TaskManager';
 import {LinearGradient} from 'expo-linear-gradient';
-
+import CreateLead from '../Leads/CreateLead';
+import InviteCustomer from '../Invite/InviteCustomer';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -42,25 +43,23 @@ const DashboardScreen = ({ navigation }) => (
 const DrawerContent = ({navigation}) => {
     return (
             <View style={styles.button}>
-            <Button title="Task Manager" color="orange" onPress={() => navigation.navigate('TaskManager')} /></View>
+            <Button title="Task Manager" color="black" onPress={() => navigation.navigate('TaskManager')} />
+            <Button title="Create Lead" color="black" onPress={() => navigation.navigate('CreateLead')} />
+            <Button title="Invite Customer" color="black" onPress={() => navigation.navigate('InviteCustomer')} />
+            </View>
     );
 };
 const AppNavigator = () => {
     return (
-        <Drawer.Navigator initialRouteName="Dashboard" drawerContent={() => <DrawerContent />}>
-            <Drawer.Screen name="Dashboard" component={DashboardScreen} />
+        <Drawer.Navigator initialRouteName="Dashboard" drawerContent={(props) => <DrawerContent {...props} />}>
+          <Drawer.Screen name="Your Space" component={DashboardScreen} />
+          <Drawer.Screen name="TaskManager" component={TaskManager} />
+          <Drawer.Screen name="CreateLead" component={CreateLead} />
+          
         </Drawer.Navigator>
-    );
+      );
 };
-const Dash = () => {
-    return (
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Dash">
-          <Stack.Screen name="TaskManager" component={TaskManager} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    );
-  };
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
